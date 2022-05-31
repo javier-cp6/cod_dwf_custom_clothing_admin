@@ -21,7 +21,7 @@ export default function App() {
           <Route path="/" element={<DashboardView />} />
           <Route path="/categories" element={<CategoryView />} />
           <Route path="/addcategory" element={<AddCategoryView />} />
-          <Route path="/editcategory/:idCat" element={<EditCategoryView />} />
+          <Route path="/editcategory/:catId" element={<EditCategoryView />} />
           <Route path="/products" element={<ProductView />} />
           <Route path="/addproduct" element={<AddProductView />} />
           <Route path="/editproduct/:idCat/:idProduct" element={<EditProductView />} />

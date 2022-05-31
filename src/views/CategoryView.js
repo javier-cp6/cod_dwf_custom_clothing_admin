@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react"
 import { getCategories } from "../services/categoryService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+import Swal from "sweetalert2";
+import { deleteCategory } from "../services/categoryService";
 
 export default function CategoryView() {
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(3);
 
   const getCategoriesData = async () => {
     try {
@@ -21,12 +23,34 @@ export default function CategoryView() {
     setPage(page + 1)
   }
 
+  const manageDelete = async (catId, cat_name) => {
+    try {
+      const confirmation = await Swal.fire({
+        title: `Do you want to delete "${cat_name}" category?`,
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete',
+        cancelButtonText: `No, cancel`,
+      })
+      if(confirmation.isConfirmed){
+        setCategories([])
+        await deleteCategory(catId)
+        setPage(1)
+        Swal.fire({
+          icon: "success",
+          title: "Category deleted!",
+        });
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
   useEffect(() => {
     getCategoriesData();
   }, [page]);
 
   if(categories.length === 0) {
-    return <div>Cargando...</div>
+    return <div>Loading...</div>
   }
 
   return (
@@ -51,7 +75,7 @@ export default function CategoryView() {
               <td>{item.cat_desc}</td>
               <td>
                 <Link to={`/editcategory/${item.cat_id}`} className="me-2">Edit</Link>
-                <button>Delete</button>
+                <button className="btn btn-danger btn-sm ms-2" onClick={() => {manageDelete(item.cat_id, item.cat_name)}}>Delete</button>
               </td>
             </tr>
           ))}
