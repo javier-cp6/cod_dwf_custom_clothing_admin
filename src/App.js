@@ -10,6 +10,7 @@ import EditCategoryView from "./views/EditCategoryView";
 import ProductView from "./views/ProductView";
 import AddProductView from "./views/AddProductView";
 import EditProductView from "./views/EditProductView";
+import LoginView from "./views/LoginView";
 
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
           <Route path="/products" element={<ProductView />} />
           <Route path="/addproduct" element={<AddProductView />} />
           <Route path="/editproduct/:idCat/:idProduct" element={<EditProductView />} />
-          {/* <Route path="/login" element={<LoginView />} /> */}
+          <Route path="/login" element={<LoginView />} />
         </Routes>
       </div>
     </Router>

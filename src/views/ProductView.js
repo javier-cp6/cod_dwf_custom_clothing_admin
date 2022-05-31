@@ -32,7 +32,10 @@ export default function ProductView() {
 
   return (
     <div>
-      <h1 className="mb-4 text-center">Products</h1>
+      <div className="d-flex justify-content-between text-center">
+        <h1 className="mb-4 text-center">Products</h1>
+        <Link className="btn btn-dark" to="/addproduct">Add</Link>
+      </div>
       <table className="table table-hover text-center">
         <thead>
           <tr>

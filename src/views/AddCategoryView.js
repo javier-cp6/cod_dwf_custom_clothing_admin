@@ -1,7 +1,7 @@
 import {useEffect, useState, useRef} from 'react'
 import { getCategories } from '../services/categoryService';
 import { addCategory } from '../services/categoryService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // import {uploadFile} from "../config/fireStorage"
 
@@ -72,7 +72,7 @@ export default function AddCategoryView() {
     return (
         <div>
             <h1 className="mb-3">
-                Add place
+                Add category
             </h1>
             <form onSubmit={(e) => {manageSubmit(e)}}>
                 <div className="mb-3">
@@ -94,7 +94,7 @@ export default function AddCategoryView() {
                     </label>
                     <input 
                         type="text"
-                        placeholder="Type a description for the place"
+                        placeholder="Type a description for the category"
                         className="form-control"
                         name="cat_desc"
                         value={inputs.cat_desc}
@@ -107,7 +107,7 @@ export default function AddCategoryView() {
                     </label>
                     <input 
                         type="text"
-                        placeholder="Type a description for the category"
+                        placeholder="Type image url"
                         className="form-control"
                         name="cat_img"
                         value={inputs.cat_img}
@@ -131,6 +131,13 @@ export default function AddCategoryView() {
                 >
                     Save
                 </button>
+                
+                <Link
+                    to="/categories" 
+                    className="btn btn-primary ms-3" 
+                >
+                    Cancel
+                </Link>
             </form>
         </div>
     )

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { getCategories } from "../services/categoryService";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
+import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { deleteCategory } from "../services/categoryService";
 
@@ -55,7 +56,10 @@ export default function CategoryView() {
 
   return (
     <div>
-      <h1 className="mb-4 text-center">Categories</h1>
+      <div className="d-flex justify-content-between text-center">
+        <h1 className="mb-4 text-center">Categories</h1>
+        <Link className="btn btn-dark" to="/addcategory">Add</Link>
+      </div>
       <table className="table table-hover text-center">
         <thead>
           <tr>

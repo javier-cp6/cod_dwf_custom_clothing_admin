@@ -2,7 +2,7 @@ import {useEffect, useState, useRef} from 'react'
 import { useParams } from "react-router-dom"
 import { getCategoryById } from '../services/categoryService'
 import { editCategory } from '../services/categoryService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 // import {uploadFile} from "../config/fireStorage"
 
 export default function EditCategoryView() {
@@ -68,7 +68,7 @@ export default function EditCategoryView() {
 
   return (
     <div>
-      <h1 className="mb-3">Add place</h1>
+      <h1 className="mb-3">Edit category</h1>
       <form
         onSubmit={(e) => {
           manageSubmit(e);
@@ -88,7 +88,7 @@ export default function EditCategoryView() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="" className="form-label">
+          <label className="form-label">
             Description
           </label>
           <input
@@ -133,6 +133,12 @@ export default function EditCategoryView() {
         >
           Save
         </button>
+        <Link
+          to="/categories" 
+          className="btn btn-primary ms-3" 
+        >
+          Cancel
+        </Link>
       </form>
     </div>
   );
