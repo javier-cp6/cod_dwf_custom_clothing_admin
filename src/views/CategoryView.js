@@ -27,9 +27,9 @@ export default function CategoryView() {
   const manageDelete = async (catId, cat_name) => {
     try {
       const confirmation = await Swal.fire({
-        title: `Do you want to delete "${cat_name}" category?`,
+        title: `Click ok to permanently delete the "${cat_name}" category?`,
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete',
+        confirmButtonText: 'Ok, delete',
         cancelButtonText: `No, cancel`,
       })
       if(confirmation.isConfirmed){

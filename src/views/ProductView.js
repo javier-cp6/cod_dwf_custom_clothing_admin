@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import { getCategories } from "../services/categoryService";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { deleteProduct } from "../services/productService";
 
 export default function ProductView() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(2);
 
   const getCategoriesData = async () => {
     try {
@@ -20,6 +22,28 @@ export default function ProductView() {
 
   const viewMore = () => {
     setPage(page + 1)
+  }
+
+  const manageDelete = async (catId, prodId, prodName) => {
+    try {
+      const confirmation = await Swal.fire({
+        title: `Click ok to permanently delete the "${prodName}" product?`,
+        showCancelButton: true,
+        confirmButtonText: 'Ok, delete',
+        cancelButtonText: `No, cancel`,
+      })
+      if(confirmation.isConfirmed){
+        setProducts([])
+        await deleteProduct(catId, prodId)
+        setPage(1)
+        Swal.fire({
+          icon: "success",
+          title: "Product deleted!",
+        });
+      }
+    } catch (error) {
+      throw error
+    }
   }
 
   useEffect(() => {
@@ -77,7 +101,7 @@ export default function ProductView() {
               <td><img className="table-img" src={item.prod_img}></img></td>
               <td>
                 <Link to={`/editproduct/${item.categoryId}/${item.prod_id}`} className="me-2">Edit</Link>
-                <button>Delete</button>
+                <button className="btn btn-danger btn-sm ms-2" onClick={() => {manageDelete(item.categoryId, item.prod_id, item.prod_name)}}>Delete</button>
               </td>
             </tr>
           ))}

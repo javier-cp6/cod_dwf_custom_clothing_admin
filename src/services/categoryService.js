@@ -1,5 +1,4 @@
 import axios from "axios";
-import Swal from "sweetalert2";
 
 const URL = process.env.REACT_APP_API;
 
@@ -33,10 +32,6 @@ const addCategory = async (category) => {
     const endpoint = `${URL}/categories`;
     const { data, status } = await axios.post(endpoint, category, { headers });
     if (status === 201) {
-      Swal.fire({
-        icon: "success",
-        title: "Category added!",
-      });
       return data;
     } else {
       throw Error("Failed to add category");
@@ -54,10 +49,6 @@ const editCategory = async (catId, category) => {
     const endpoint = `${URL}/categories/${catId}`;
     const { data, status } = await axios.put(endpoint, category, { headers });
     if (status === 200) {
-      Swal.fire({
-        icon: "success",
-        title: "Category updated!",
-      });
       return data;
     } else {
       throw Error("Failed to update category");

@@ -1,8 +1,8 @@
 import {useEffect, useState, useRef} from 'react'
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
+import Swal from 'sweetalert2';
 import { getCategoryById } from '../services/categoryService'
 import { editCategory } from '../services/categoryService';
-import { useNavigate, Link } from 'react-router-dom';
 // import {uploadFile} from "../config/fireStorage"
 
 export default function EditCategoryView() {
@@ -28,9 +28,11 @@ export default function EditCategoryView() {
       // const savedFile = await uploadFile(file)
 
       await editCategory(catId, { ...inputs });
-
       setLoading(false);
-
+      Swal.fire({
+        icon: "success",
+        title: "Category updated!",
+      });
       navigate("/categories");
     } catch (error) {
       setLoading(false);
@@ -53,10 +55,10 @@ export default function EditCategoryView() {
   useEffect(() => {
     const getCategoryData = async () => {
       try {
-        setLoading(true);
+        // setLoading(true);
         const categoryData = await getCategoryById(catId);
         setInputs(categoryData);
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
         throw error;
       }
@@ -83,7 +85,7 @@ export default function EditCategoryView() {
             placeholder="Category name"
             className="form-control"
             name="cat_name"
-            value={inputs.cat_name}
+            value={inputs.cat_name || ""}
             onChange={(e) => {
               manageInputs(e);
             }}
@@ -98,7 +100,7 @@ export default function EditCategoryView() {
             placeholder="Type a description for the place"
             className="form-control"
             name="cat_desc"
-            value={inputs.cat_desc}
+            value={inputs.cat_desc || ""}
             onChange={(e) => {
               manageInputs(e);
             }}
@@ -111,7 +113,7 @@ export default function EditCategoryView() {
             placeholder="Type a description for the category"
             className="form-control"
             name="cat_img"
-            value={inputs.cat_img}
+            value={inputs.cat_img || ""}
             onChange={(e) => {
               manageInputs(e);
             }}
