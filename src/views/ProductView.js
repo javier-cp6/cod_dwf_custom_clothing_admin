@@ -20,6 +20,9 @@ export default function ProductView() {
     }
   };
 
+  // const restartPage = () => {
+  //   setPage(1)
+  // }
   const viewMore = () => {
     setPage(page + 1)
   }
@@ -32,14 +35,16 @@ export default function ProductView() {
         confirmButtonText: 'Ok, delete',
         cancelButtonText: `No, cancel`,
       })
+
       if(confirmation.isConfirmed){
+        setPage(0)
         setProducts([])
         await deleteProduct(catId, prodId)
-        setPage(1)
         Swal.fire({
           icon: "success",
           title: "Product deleted!",
         });
+        setPage(1)
       }
     } catch (error) {
       throw error
@@ -108,7 +113,7 @@ export default function ProductView() {
         </tbody>
       </table>
       <div className="text-center">
-        <button className="btn btn-outline-success btn-sm" onClick={viewMore}>
+        <button className="btn btn-outline-success btn-sm" onClick={viewMore} >
           View more
         </button>
       </div>

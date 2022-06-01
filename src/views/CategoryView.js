@@ -16,7 +16,7 @@ export default function CategoryView() {
       const categoriesArr = await getCategories(page, limit);
       setCategories([...categories, ...categoriesArr]);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
@@ -33,6 +33,7 @@ export default function CategoryView() {
         cancelButtonText: `No, cancel`,
       })
       if(confirmation.isConfirmed){
+        setPage(0)
         setCategories([])
         await deleteCategory(catId)
         setPage(1)
@@ -40,6 +41,7 @@ export default function CategoryView() {
           icon: "success",
           title: "Category deleted!",
         });
+        setPage(1)
       }
     } catch (error) {
       throw error
