@@ -53,8 +53,10 @@ export default function EditCategoryView() {
   useEffect(() => {
     const getCategoryData = async () => {
       try {
+        setLoading(true);
         const categoryData = await getCategoryById(catId);
         setInputs(categoryData);
+        setLoading(false);
       } catch (error) {
         throw error;
       }
