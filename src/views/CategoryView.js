@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { getCategories } from "../services/categoryService";
 import { Link } from "react-router-dom";
 
-import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { deleteCategory } from "../services/categoryService";
 

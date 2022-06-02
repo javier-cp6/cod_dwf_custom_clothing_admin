@@ -2,7 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles.css"
 
+import { useContext } from 'react'
 import { AuthContextProvider } from "./context/authContext"
+import { AuthContext } from "./context/authContext";
 
 import NavigationBar from "./components/NavigationBar";
 import DashboardView from "./views/DashboardView";
@@ -15,6 +17,19 @@ import EditProductView from "./views/EditProductView";
 import LoginView from "./views/LoginView";
 
 export default function App() {
+  const { user } = useContext(AuthContext)
+
+  if(!user) {
+    return (
+      <Router>
+          <AuthContextProvider>
+            <NavigationBar />
+            <LoginView />
+          </AuthContextProvider>
+      </Router>
+    )
+  }
+
   return (
     <Router>
       <AuthContextProvider>
