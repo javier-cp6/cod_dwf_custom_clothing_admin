@@ -61,7 +61,7 @@ export default function ProductView() {
 
   return (
     <div>
-      <div className="d-flex justify-content-between text-center">
+      <div className="d-flex justify-content-between text-center align-items-center">
         <h1 className="mb-4 text-center">Products</h1>
         <Link className="btn btn-dark" to="/addproduct">Add</Link>
       </div>
@@ -104,7 +104,7 @@ export default function ProductView() {
               <td>{item.prod_topic}</td>
               <td>{item.prod_designer}</td>
               <td><img className="table-img" src={item.prod_img}></img></td>
-              <td>
+              <td className="d-flex">
                 <Link to={`/editproduct/${item.categoryId}/${item.prod_id}`} className="me-2">Edit</Link>
                 <button className="btn btn-danger btn-sm ms-2" onClick={() => {manageDelete(item.categoryId, item.prod_id, item.prod_name)}}>Delete</button>
               </td>
@@ -113,7 +113,7 @@ export default function ProductView() {
         </tbody>
       </table>
       <div className="text-center">
-        <button className="btn btn-outline-success btn-sm" onClick={viewMore} >
+        <button className="btn btn-dark btn-sm" onClick={viewMore} >
           View more
         </button>
       </div>

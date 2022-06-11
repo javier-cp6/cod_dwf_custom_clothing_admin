@@ -57,7 +57,7 @@ export default function CategoryView() {
 
   return (
     <div>
-      <div className="d-flex justify-content-between text-center">
+      <div className="d-flex justify-content-between text-center align-items-center">
         <h1 className="mb-4 text-center">Categories</h1>
         <Link className="btn btn-dark" to="/addcategory">Add</Link>
       </div>

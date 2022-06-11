@@ -4,6 +4,8 @@ import { Container, Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from '../context/authContext'
 
+import main_logo from "../img/main_logo.jpg"
+
 export default function NavigationBar() {
 
   const { user, signInWithGoogle, signOutFromGoogle } = useContext(AuthContext)
@@ -12,9 +14,14 @@ export default function NavigationBar() {
     <>
       <Navbar bg="light" expand="sm" variant="light">
         <Container className="justify-content-between">
-          <Navbar.Brand className="fw-bold fs-4" href="/">
+          <div className="col-6 col-sm-6 col-md-auto col-lg-2">
+            <Link className="div-img-logo d-flex" to="/">
+              <img className="img-logo navbar-brand mx-0" src={main_logo} alt="la consigne logo"></img>
+            </Link>
+          </div>
+          {/* <Navbar.Brand className="fw-bold fs-4" href="/">
             *LA CONSIGNE*
-          </Navbar.Brand>
+          </Navbar.Brand> */}
 
           {user ? (
             <div className="d-flex">
@@ -29,7 +36,7 @@ export default function NavigationBar() {
                   Products
                 </Button>
                 <Button href="/designers" variant="dark ms-2">
-                  Designers
+                  Creators
                 </Button>
               </div>
               <Nav>
