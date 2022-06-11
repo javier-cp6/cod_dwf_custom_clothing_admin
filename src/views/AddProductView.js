@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { addProduct } from '../services/productService';
 import { useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-// import {uploadFile} from "../config/fireStorage"
+import {uploadFile} from "../config/firebaseStorage"
+
+let myFile = null
 
 export default function AddProductView() {
   const [inputs, setInputs] = useState({
@@ -13,6 +15,11 @@ export default function AddProductView() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const inputFile = useRef()
+  const manageFile = (e) => {
+    myFile = e.target.files[0]
+}
 
   const manageInputs = (e) => {
     setInputs({
@@ -26,9 +33,9 @@ export default function AddProductView() {
     try {
       setLoading(true);
 
-      // const savedFile = await uploadFile(file)
+      const savedFile = await uploadFile(myFile)
 
-      await addProduct({ ...inputs });
+      await addProduct({ ...inputs, prod_img:savedFile });
       setLoading(false);
       Swal.fire({
         icon: "success",
@@ -153,7 +160,7 @@ export default function AddProductView() {
             }}
           />
         </div>
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label className="form-label">Image URL</label>
           <input
             type="text"
@@ -163,6 +170,17 @@ export default function AddProductView() {
             value={inputs.prod_img  || ""}
             onChange={(e) => {
               manageInputs(e);
+            }}
+          />
+        </div> */}
+        <div className="mb-3">
+          <label className="form-label">Upload image</label>
+          <input
+            type="file"
+            className="form-control"
+            ref={inputFile}
+            onChange={(e) => {
+              manageFile(e);
             }}
           />
         </div>
